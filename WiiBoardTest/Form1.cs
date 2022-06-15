@@ -8,15 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WiimoteLib;
-using Rug.Osc;
+//using Rug.Osc;
 using System.Net;
 using System.Threading;
+
+using MakingThings;
 
 namespace WiiBoardTest
 {
     public partial class Form1 : Form
     {
-        OscSender oscsend;
+        private UdpPacket udpPacket;
+        private Osc oscUdp;
+        OscMessage oscMsg;
+        //OscSender oscsend;
         Wiimote wm = new Wiimote();
         public Form1()
         {
@@ -25,54 +30,84 @@ namespace WiiBoardTest
         }
 
         // OSC送信のセクチョン
-        private void osctrans(String sendsaki, int port, bool flag, bool shokai)
+        private void oscsetup(String sendsaki, int port, bool flag)
         {
-            while (flag)
-            {
-                // This is the ip address we are going to send to
-                IPAddress address = IPAddress.Parse(sendsaki);
-                label9.Text = "address: " + sendsaki + "\rPort: " + port.ToString();
-                // Create a new sender instance
-                using (OscSender sender = new OscSender(address, port))
-                {
-                    //if (shokai)
-                    //{
-                        // Connect the sender socket  
-                        sender.Connect();
-                    //    shokai = false;
-                    //}
-                    if (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 > 0.2 || wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 < -0.2 )
-                    {
-                        // Send a new message
-                        sender.Send(new OscMessage(x_address.Text, wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20));
-                    }
-                    else
-                    {
-                        sender.Send(new OscMessage(x_address.Text, 0.0));
-                    }
-                    if (wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 > 0.2 || wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 < -0.2)
-                    {
-                        sender.Send(new OscMessage(y_address.Text, wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / -12));
-                    }
-                    else
-                    {
-                        sender.Send(new OscMessage(y_address.Text, 0.0));
-                    }
-                    label10.Text ="X: " + wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 +"\rY: " + wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12;
-                    
-                }
-                //Thread.Sleep(10);
+            udpPacket = new UdpPacket();
+            udpPacket.RemoteHostName = sendsaki;
+            udpPacket.RemotePort = port;
+            udpPacket.LocalPort = 20938;
+            udpPacket.Open();
+            oscUdp = new Osc(udpPacket);
+        }
+        private void osctrans(String address, float data, bool state)
+        {
+            while (true) {
+                //oscMsg = Osc.StringToOscMessage(address + " " + data);
+                if ((wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 > 0.15 || wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 < -0.15) && (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 > -2 && wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 < 2))
+                    oscMsg = Osc.StringToOscMessage(x_address.Text + " " + (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20));
+                else
+                    oscMsg = Osc.StringToOscMessage(x_address.Text + " " + 0.0);
+                oscUdp.Send(oscMsg);
+
+                if ((wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 > 0.15 || wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 < -0.15) && (wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 > -2 && wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 < 2))
+                    oscMsg = Osc.StringToOscMessage(y_address.Text + " " + (-wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12));
+                else
+                    oscMsg = Osc.StringToOscMessage(y_address.Text + " " + 0.0);
+                oscUdp.Send(oscMsg);
+                label10.Text = "X: " + wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 + "\rY: " + wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12;
                 System.Windows.Forms.Application.DoEvents();
             }
         }
+        
+        //{
+        //    while (flag)
+        //    {
+        //        // This is the ip address we are going to send to
+        //        IPAddress address = IPAddress.Parse(sendsaki);
+        //        label9.Text = "address: " + sendsaki + "\rPort: " + port.ToString();
+        //        // Create a new sender instance
+        //        using (OscSender sender = new OscSender(address, port))
+        //        {
+        //            //if (shokai)
+        //            //{
+        //                // Connect the sender socket  
+        //                sender.Connect();
+        //            //    shokai = false;
+        //            //}
+        //            if (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 > 0.2 || wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 < -0.2 )
+        //            {
+        //                // Send a new message
+        //                sender.Send(new OscMessage(x_address.Text, wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20));
+        //            }
+        //            else
+        //            {
+        //                sender.Send(new OscMessage(x_address.Text, 0.0));
+        //            }
+        //            if (wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 > 0.2 || wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 < -0.2)
+        //            {
+        //                sender.Send(new OscMessage(y_address.Text, wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / -12));
+        //            }
+        //            else
+        //            {
+        //                sender.Send(new OscMessage(y_address.Text, 0.0));
+        //            }
+        //            label10.Text ="X: " + wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 +"\rY: " + wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12;
+                    
+        //        }
+        //        //Thread.Sleep(10);
+        //        System.Windows.Forms.Application.DoEvents();
+        //    }
+        //}
         private void button1_Click(object sender, EventArgs e)
         {
-            osctrans(addresstext.Text, (int)senderport.Value, true, true);
+            oscsetup(addresstext.Text, (int)senderport.Value, true);
+            osctrans(x_address.Text, wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20, true);
+            //osctrans(y_address.Text, wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12, true);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            osctrans(addresstext.Text, (int)senderport.Value, false, false);
+            oscsetup(addresstext.Text, (int)senderport.Value, false);
         }
 
 

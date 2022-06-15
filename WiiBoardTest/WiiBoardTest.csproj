@@ -11,4 +11,10 @@
     <PackageReference Include="WiimoteLib" Version="1.7.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="MakeControllerOsc">
+      <HintPath>MakeControllerOsc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
