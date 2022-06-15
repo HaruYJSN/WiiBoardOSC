@@ -89,8 +89,15 @@ namespace WiiBoardTest
             this.wm.Disconnect();
         }
 
+        private delegate void UpdateWiimoteStateDelegate(object sender, WiimoteChangedEventArgs args);
+
         void wm_WiimoteChanged(object sender, WiimoteChangedEventArgs args)
         {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new UpdateWiimoteStateDelegate(wm_WiimoteChanged), sender, args);
+                return;
+            }
             WiimoteState ws = args.WiimoteState;
             this.DrawForms(ws);
 
