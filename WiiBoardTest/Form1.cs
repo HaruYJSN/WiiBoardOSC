@@ -41,7 +41,7 @@ namespace WiiBoardTest
         }
         private void osctrans(String address, float data, bool state)
         {
-            while (true) {
+            //while (true) {
                 //oscMsg = Osc.StringToOscMessage(address + " " + data);
                 if ((wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 > 0.15 || wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 < -0.15) && (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 > -2 && wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 < 2))
                     oscMsg = Osc.StringToOscMessage(x_address.Text + " " + (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20));
@@ -56,7 +56,7 @@ namespace WiiBoardTest
                 oscUdp.Send(oscMsg);
                 label10.Text = "X: " + wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 + "\rY: " + wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12;
                 System.Windows.Forms.Application.DoEvents();
-            }
+            //}
         }
         
         //{
@@ -101,7 +101,8 @@ namespace WiiBoardTest
         private void button1_Click(object sender, EventArgs e)
         {
             oscsetup(addresstext.Text, (int)senderport.Value, true);
-            osctrans(x_address.Text, wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20, true);
+            backgroundOSC.RunWorkerAsync();
+            //osctrans(x_address.Text, wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20, true);
             //osctrans(y_address.Text, wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12, true);
         }
 
@@ -110,6 +111,12 @@ namespace WiiBoardTest
             oscsetup(addresstext.Text, (int)senderport.Value, false);
         }
 
+        private void backgroundOSC_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            while(true)
+            osctrans(x_address.Text, wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20, true);
+        }
 
         // Wiimoteのセクチョン
 
@@ -139,6 +146,14 @@ namespace WiiBoardTest
             this.label6.Text = ws.BalanceBoardState.WeightKg.ToString();
             this.label7.Text = "X: " + ws.BalanceBoardState.CenterOfGravity.X;
             this.label8.Text = "Y: " + ws.BalanceBoardState.CenterOfGravity.Y;
+        }
+
+        private void backgroundWiimote_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // 処理を開始する
+            MessageBox.Show("接続します.");
+            while (true)
+                osctrans(x_address.Text, wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20, true);
         }
 
         public void DrawForms(WiimoteState ws)

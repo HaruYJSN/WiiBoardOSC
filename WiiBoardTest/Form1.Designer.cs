@@ -53,6 +53,7 @@ namespace WiiBoardTest
             this.x_address = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.backgroundOSC = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -304,6 +305,10 @@ namespace WiiBoardTest
             this.label3.TabIndex = 0;
             this.label3.Text = "x";
             // 
+            // backgroundOSC
+            // 
+            this.backgroundOSC.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundOSC_DoWork);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -352,6 +357,7 @@ namespace WiiBoardTest
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label10;
+        private System.ComponentModel.BackgroundWorker backgroundOSC;
     }
 }
 
