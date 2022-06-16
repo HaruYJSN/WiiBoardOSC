@@ -43,7 +43,6 @@ namespace WiiBoardTest
             this.c_button = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.senderport = new System.Windows.Forms.NumericUpDown();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -94,7 +93,7 @@ namespace WiiBoardTest
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(775, 381);
+            this.tabControl1.Size = new System.Drawing.Size(513, 283);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage2
@@ -109,7 +108,7 @@ namespace WiiBoardTest
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(767, 353);
+            this.tabPage2.Size = new System.Drawing.Size(505, 255);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Bluetooth";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -117,7 +116,7 @@ namespace WiiBoardTest
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 199);
+            this.label8.Location = new System.Drawing.Point(7, 139);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(34, 15);
             this.label8.TabIndex = 2;
@@ -126,7 +125,7 @@ namespace WiiBoardTest
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 184);
+            this.label7.Location = new System.Drawing.Point(6, 124);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 15);
             this.label7.TabIndex = 2;
@@ -135,7 +134,7 @@ namespace WiiBoardTest
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(19, 136);
+            this.label6.Location = new System.Drawing.Point(19, 76);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(22, 15);
             this.label6.TabIndex = 2;
@@ -144,7 +143,7 @@ namespace WiiBoardTest
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 121);
+            this.label5.Location = new System.Drawing.Point(6, 61);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 15);
             this.label5.TabIndex = 2;
@@ -152,7 +151,7 @@ namespace WiiBoardTest
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(183, 49);
+            this.pictureBox1.Location = new System.Drawing.Point(88, 6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(400, 240);
             this.pictureBox1.TabIndex = 1;
@@ -160,7 +159,7 @@ namespace WiiBoardTest
             // 
             // d_button
             // 
-            this.d_button.Location = new System.Drawing.Point(102, 77);
+            this.d_button.Location = new System.Drawing.Point(7, 35);
             this.d_button.Name = "d_button";
             this.d_button.Size = new System.Drawing.Size(75, 23);
             this.d_button.TabIndex = 0;
@@ -170,7 +169,7 @@ namespace WiiBoardTest
             // 
             // c_button
             // 
-            this.c_button.Location = new System.Drawing.Point(102, 48);
+            this.c_button.Location = new System.Drawing.Point(7, 6);
             this.c_button.Name = "c_button";
             this.c_button.Size = new System.Drawing.Size(75, 23);
             this.c_button.TabIndex = 0;
@@ -181,7 +180,6 @@ namespace WiiBoardTest
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.label10);
-            this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.senderport);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.button1);
@@ -197,7 +195,7 @@ namespace WiiBoardTest
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(767, 353);
+            this.tabPage1.Size = new System.Drawing.Size(505, 255);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "OSC";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -205,20 +203,11 @@ namespace WiiBoardTest
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(225, 197);
+            this.label10.Location = new System.Drawing.Point(61, 104);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(44, 15);
+            this.label10.Size = new System.Drawing.Size(17, 30);
             this.label10.TabIndex = 7;
-            this.label10.Text = "label10";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(225, 141);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(38, 15);
-            this.label9.TabIndex = 6;
-            this.label9.Text = "label9";
+            this.label10.Text = "X:\r\nY:";
             // 
             // senderport
             // 
@@ -239,7 +228,7 @@ namespace WiiBoardTest
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(387, 125);
+            this.button2.Location = new System.Drawing.Point(227, 129);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
@@ -249,7 +238,7 @@ namespace WiiBoardTest
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(387, 96);
+            this.button1.Location = new System.Drawing.Point(227, 100);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -313,7 +302,7 @@ namespace WiiBoardTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(533, 301);
             this.Controls.Add(this.tabControl1);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -354,7 +343,6 @@ namespace WiiBoardTest
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label10;
         private System.ComponentModel.BackgroundWorker backgroundOSC;
