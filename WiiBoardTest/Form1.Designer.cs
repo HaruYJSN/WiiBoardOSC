@@ -221,7 +221,7 @@ namespace WiiBoardTest
             this.senderport.Size = new System.Drawing.Size(100, 23);
             this.senderport.TabIndex = 5;
             this.senderport.Value = new decimal(new int[] {
-            8000,
+            39570,
             0,
             0,
             0});
