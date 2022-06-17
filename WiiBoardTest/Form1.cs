@@ -44,12 +44,19 @@ namespace WiiBoardTest
             //while (true) {
             float wbx =  wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20;
             float wby = -wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12;
-                //oscMsg = Osc.StringToOscMessage(address + " " + data);
-                if ((wbx > 0.15 || wbx < -0.15) && (wbx > -2 && wbx < 2))
-                if (wbx > 0.4 && wbx < 0.5)
+            //oscMsg = Osc.StringToOscMessage(address + " " + data);
+            if ((wbx > 0.15 || wbx < -0.15) && (wbx > -2 && wbx < 2))
+                if ((wbx > 0.7 && wbx < 0.84) || (wbx < -0.7 && wbx > -0.84))
+                {
                     oscMsg = Osc.StringToOscMessage(y_address.Text + " " + (1.0));
-                else
+                    Thread.Sleep(50);
+                }
+                else {
                     oscMsg = Osc.StringToOscMessage(y_address.Text + " " + (float)0.000001);
+                }
+
+            else
+                oscMsg = Osc.StringToOscMessage(y_address.Text + " " + (float)0.000001);
                 oscUdp.Send(oscMsg);
 
                 //if ((wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 > 0.15 || wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 < -0.15) && (wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 > -2 && wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 < 2))
