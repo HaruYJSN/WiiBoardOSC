@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Rug.Osc" Version="1.2.5" />
     <PackageReference Include="WiimoteLib" Version="1.7.0" />
   </ItemGroup>
 

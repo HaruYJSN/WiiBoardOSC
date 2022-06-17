@@ -42,19 +42,22 @@ namespace WiiBoardTest
         private void osctrans(String address, float data, bool state)
         {
             //while (true) {
+            float wbx =  wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20;
+            float wby = -wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12;
                 //oscMsg = Osc.StringToOscMessage(address + " " + data);
-                if ((wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 > 0.15 || wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 < -0.15) && (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 > -2 && wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 < 2))
-                    oscMsg = Osc.StringToOscMessage(x_address.Text + " " + (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20));
-                else
-                    oscMsg = Osc.StringToOscMessage(x_address.Text + " " + (float)0.000001);
-                oscUdp.Send(oscMsg);
-
-                if ((wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 > 0.15 || wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 < -0.15) && (wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 > -2 && wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 < 2))
-                    oscMsg = Osc.StringToOscMessage(y_address.Text + " " + (-wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12));
+                if ((wbx > 0.15 || wbx < -0.15) && (wbx > -2 && wbx < 2))
+                if (wbx > 0.4 && wbx < 0.5)
+                    oscMsg = Osc.StringToOscMessage(y_address.Text + " " + (1.0));
                 else
                     oscMsg = Osc.StringToOscMessage(y_address.Text + " " + (float)0.000001);
                 oscUdp.Send(oscMsg);
-                label10.Text = "X: " + wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 + "\rY: " + wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12;
+
+                //if ((wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 > 0.15 || wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 < -0.15) && (wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 > -2 && wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 < 2))
+                //    oscMsg = Osc.StringToOscMessage(y_address.Text + " " + (-wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12));
+                //else
+                //    oscMsg = Osc.StringToOscMessage(y_address.Text + " " + (float)0.000001);
+                //oscUdp.Send(oscMsg);
+                label10.Text = "X: " + wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 + "\r";
                 System.Windows.Forms.Application.DoEvents();
             //}
         }
