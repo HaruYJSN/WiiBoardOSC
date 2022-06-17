@@ -44,7 +44,6 @@ namespace WiiBoardTest
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.senderport = new System.Windows.Forms.NumericUpDown();
-            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -181,7 +180,6 @@ namespace WiiBoardTest
             // 
             this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.senderport);
-            this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.progressBar2);
             this.tabPage1.Controls.Add(this.progressBar1);
@@ -225,16 +223,6 @@ namespace WiiBoardTest
             0,
             0,
             0});
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(227, 129);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Disconnect";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -343,7 +331,6 @@ namespace WiiBoardTest
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label10;
         private System.ComponentModel.BackgroundWorker backgroundOSC;
     }
