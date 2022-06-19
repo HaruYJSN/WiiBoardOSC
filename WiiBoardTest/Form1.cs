@@ -41,7 +41,8 @@ namespace WiiBoardTest
         }
         private void osctrans(String address, float data, bool state)
         {
-            oscMsg = Osc.StringToOscMessage("/VMT/Room/Unity "+","+0+","+2+","+0f+",0,0,0,0,0,0,HMD");
+            //oscMsg = Osc.StringToOscMessage("/VMT/Room/Unity " + "," + 0 + "," + 2 + "," + 0f + ",0,0,0,0,0,0,HMD");
+            oscMsg = Osc.StringToOscMessage("/VMT/Room/Unity 0 2 0.000001 0 0 0 0 0 0 HMD");
             oscUdp.Send(oscMsg);
             //while (true) {
             //oscMsg = Osc.StringToOscMessage(address + " " + data);
@@ -55,7 +56,26 @@ namespace WiiBoardTest
             //oscMsg = Osc.StringToOscMessage(y_address.Text + " " + (-wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12));
             //else
             //    oscMsg = Osc.StringToOscMessage(y_address.Text + " " + (float)0.0);
-            oscMsg = Osc.StringToOscMessage("/VMT/Input/Joystick " + 0 + "," + 0 + "," + 0f + "," + (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20) + "," + (-wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12));
+            //oscMsg = Osc.StringToOscMessage("/VMT/Input/Joystick " + 0 + " " + 0 + " " + 0f + " " + (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20) + " " + (-wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12));
+            if (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 > -2 && wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 < 2) {
+                if (wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 > -2 && wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 < 2)
+                    oscMsg = Osc.StringToOscMessage("/VMT/Input/Joystick 0 0 0.000001 " + (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20) + " " + (-wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12));
+                else
+                    oscMsg = Osc.StringToOscMessage("/VMT/Input/Joystick 0 0 0.000001 " + (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20) + " " + 0.00000001);
+            }
+            else
+                oscMsg = Osc.StringToOscMessage("/VMT/Input/Joystick 0 0 0.000001 0.00000001 0.00000001");
+            
+            if (wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 > -2 && wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12 < 2)
+            {
+                if (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 > -2 && wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 < 2)
+                    oscMsg = Osc.StringToOscMessage("/VMT/Input/Joystick 0 0 0.000001 " + (wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20) + " " + (-wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12));
+                else
+                    oscMsg = Osc.StringToOscMessage("/VMT/Input/Joystick 0 0 0.000001 0.00000001" + (-wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12));
+            }   
+            else
+                oscMsg = Osc.StringToOscMessage("/VMT/Input/Joystick 0 0 0.000001 0.00000001 0.00000001");
+
             oscUdp.Send(oscMsg);
                 label10.Text = "X: " + wm.WiimoteState.BalanceBoardState.CenterOfGravity.X / 20 + "\rY: " + wm.WiimoteState.BalanceBoardState.CenterOfGravity.Y / 12;
                 System.Windows.Forms.Application.DoEvents();
